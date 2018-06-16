@@ -132,7 +132,7 @@ class AdminUser extends AdminBase
      * 删除管理员
      * @param $id
      */
-    public function delete($id)
+    public function delete1($id)
     {
         if ($id == 1) {
             $this->error('默认管理员不可删除');
