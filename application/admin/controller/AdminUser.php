@@ -144,4 +144,9 @@ class AdminUser extends AdminBase
             $this->error('删除失败');
         }
     }
+    
+      public function del($id)
+    {
+          
+    }
 }
