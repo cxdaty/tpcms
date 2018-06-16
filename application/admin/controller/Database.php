@@ -174,7 +174,8 @@ class Database extends AdminBase {
         if (request()->isPost() && !empty($tables) && is_array($tables)) { //初始化
             //读取备份配置
             $config = array(
-                'path'     => realpath(config('data_backup_puth')) . DIRECTORY_SEPARATOR,
+              //  'path'     => realpath(config('data_backup_puth')) . DIRECTORY_SEPARATOR,
+                'path'     => realpath('data/') . DIRECTORY_SEPARATOR,
                 'part'     => '20971520',
                 'compress' => '1',
                 'level'    => '9',
