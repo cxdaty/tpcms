@@ -145,8 +145,5 @@ class AdminUser extends AdminBase
         }
     }
     
-      public function del($id)
-    {
-          
-    }
+    
 }
