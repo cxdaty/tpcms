@@ -255,3 +255,173 @@ function format_bytes($number)
       
     return sprintf("%0.2f Gb", $number/1024/1024/1024);  
 } 
+
+/**
+ * 导出数据为excal文件
+ *
+ * @param unknown $expTitle            
+ * @param unknown $expCellName            
+ * @param unknown $expTableData            
+ */
+function dataExcel($expTitle, $expCellName, $expTableData)
+{  
+    include 'extend/lib/PHPExcel/PHPExcel.php';   
+    $fileName = $expTitle . date('_YmdHis'); // or $xlsTitle 文件名称可根据自己情况设定
+    $cellNum = count($expCellName);
+    $dataNum = count($expTableData);
+    //var_dump($expCellName,$expTableData);exit;
+    $objPHPExcel = new \PHPExcel();
+    $cellName = array(
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+        'AA',
+        'AB',
+        'AC',
+        'AD',
+        'AE',
+        'AF',
+        'AG',
+        'AH',
+        'AI',
+        'AJ',
+        'AK',
+        'AL',
+        'AM',
+        'AN',
+        'AO',
+        'AP',
+        'AQ',
+        'AR',
+        'AS',
+        'AT',
+        'AU',
+        'AV',
+        'AW',
+        'AX',
+        'AY',
+        'AZ'
+    );
+   // var_dump($cellNum,$dataNum);exit;
+    for ($i = 0; $i < $cellNum; $i ++) {
+        //设置标题
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i] . '1', $expCellName[$i][1]);
+    }
+    for ($i = 0; $i < $dataNum; $i ++) {
+        for ($j = 0; $j < $cellNum; $j ++) {
+            $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j] . ($i + 2), $expTableData[$i][$expCellName[$j][0]]); 
+        }
+    }
+    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30); //设置宽度
+   // $objPHPExcel->getActiveSheet()->getStyle('E4')->getAlignment()->setWrapText(true);  自动换行
+    $objPHPExcel->setActiveSheetIndex(0);
+  
+    header('pragma:public'); header("Expires: 0"); 
+    header('Content-type:application/vnd.ms-excel;charset=utf-8;name="' . $expTitle . '.xls"');   
+    header("Content-Disposition:attachment;filename=$fileName.xls"); // attachment新窗口打印inline本窗口打印
+    $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+}
+
+/** 
+*  数据导入 
+* @param string $file excel文件 
+* @param string $sheet 
+ * @return string   返回解析数据 
+ * @throws PHPExcel_Exception 
+ * @throws PHPExcel_Reader_Exception 
+*/  
+function importExecl($file='', $sheet=0){  
+    $file = iconv("utf-8", "gb2312", $file);   //转码  
+    if(empty($file) OR !file_exists($file)) {  
+        die('file not exists!');  
+    } 
+    
+    include 'extend/lib/PHPExcel/PHPExcel.php';  //引入PHP EXCEL类  
+    $objRead  = \PHPExcel_IOFactory::createReaderForFile($file);//方法1
+//    方法2
+//    $objRead = new PHPExcel_Reader_Excel2007();   //建立reader对象    
+//    if(!$objRead->canRead($file)){  
+//        $objRead = new PHPExcel_Reader_Excel5();  
+//        if(!$objRead->canRead($file)){  
+//            die('No Excel!');  
+//        }  
+//    }  
+  
+    $cellName = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ');  
+  
+    $obj = $objRead->load($file);  //建立excel对象  
+    $currSheet = $obj->getSheet($sheet);   //获取指定的sheet表  
+    $columnH = $currSheet->getHighestColumn();   //取得最大的列号  
+    $columnCnt = array_search($columnH, $cellName);  
+    $rowCnt = $currSheet->getHighestRow();   //获取总行数  
+  
+    $data = array();  
+    for($_row=2; $_row<=$rowCnt; $_row++){  //读取内容  
+        for($_column=0; $_column<=$columnCnt; $_column++){  
+            $cellId = $cellName[$_column].$_row;  
+            $cellValue = $currSheet->getCell($cellId)->getValue();  
+             //$cellValue = $currSheet->getCell($cellId)->getCalculatedValue();  #获取公式计算的值  
+            if($cellValue instanceof PHPExcel_RichText){   //富文本转换字符串  
+                $cellValue = $cellValue->__toString();  
+            }  
+  
+            $data[$_row][$cellName[$_column]] = $cellValue;  
+        }  
+    }  
+  
+    return $data;  
+}  
+
+// 获取用户真实 IP
+function getIP() {
+    
+    static $realip = NULL;
+    if ($realip !== NULL) {
+        return $realip;
+    }
+    //判断服务器是否允许$_SERVER
+    if (isset($_SERVER)) {
+        if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+            $realip = $_SERVER["HTTP_X_FORWARDED_FOR"]; //客户端跟服务器”握手”时候的IP
+        } else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
+            $realip = $_SERVER["HTTP_CLIENT_IP"]; //IIS服务器,用的是CLIENT_IP代表客户的IP
+        } else {
+            $realip = $_SERVER["REMOTE_ADDR"]; //代理服务器的IP
+        }
+    } else {
+        //不允许就使用getenv获取 
+        if (getenv("HTTP_X_FORWARDED_FOR")) {
+            $realip = getenv("HTTP_X_FORWARDED_FOR");
+        } else if (getenv("HTTP_CLIENT_IP")) {
+            $realip = getenv("HTTP_CLIENT_IP");
+        } else {
+            $realip = getenv("REMOTE_ADDR");
+        }
+    }
+    return $realip;
+        
+}
