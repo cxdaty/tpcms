@@ -13,12 +13,9 @@ use think\Session;
  */
 class Login extends Controller
 {
-    /**
-     * 后台登录
-     * @return mixed
-     */
+    
     public function index()
-    {
+    { 
         return $this->fetch();
     }
 
