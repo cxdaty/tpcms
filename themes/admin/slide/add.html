@@ -22,10 +22,17 @@
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">名称</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="name" value="" required  lay-verify="required" placeholder="请输入名称" class="layui-input">
+                        <div class="layui-input-inline">
+                            <input type="text" name="name" value="" required  lay-verify="required" placeholder="请输入名称" class="layui-input" id="useremail">
+                             
+                             
                         </div>
+                        <img style="display: none;" id="useremailRight" class="isRight" 
+                          src="__IMAGES__/right.png" width="19" height="18"></img>
                     </div>
+
+                    
+
                     <div class="layui-form-item">
                         <label class="layui-form-label">说明</label>
                         <div class="layui-input-block">
@@ -42,7 +49,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">链接</label>
                         <div class="layui-input-block">
-                            <input type="text" name="link" value="" placeholder="（选填）请输入链接" class="layui-input">
+                            <input type="text" name="link" value="" placeholder="（选填）请输入链接" class="layui-input" id="link">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -76,4 +83,53 @@
         </div>
     </div>
 </div>
+<script src="__JS__/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function () {
+       $("#useremail").focus(function () {
+        $("#useremail").css("background-color", "#FFFFCC");
+       });
+       $("#useremail").blur(function () {
+        var regemail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        var uemail = $("#useremail").val();
+        $("#useremail").css("background-color", "white");
+        if (uemail.length <= 0 || !regemail.test(uemail)) {
+            $("#useremailRight").hide();
+           // layer.msg('邮箱格式不正确');
+            //layer.tips('邮箱格式不正确', this, {tips: 1});
+            layer.tips('邮箱格式不正确', this, {tips: [1,'#FF4500']});
+                       // $("#useremailError").show();
+                   } else {
+                    $("#useremailRight").show();
+
+                }
+            });
+
+        $("#link").focus(function () {
+        $("#link").css("background-color", "#FFFFCC");
+       });
+        $("#link").blur(function () {
+        var reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        var link = $("#link").val();
+        $("#link").css("background-color", "white");
+        if (link.length <= 0 || !reg.test(link)) {
+            $("#useremailRight").hide();
+           // layer.msg('邮箱格式不正确');
+            //layer.tips('邮箱格式不正确', this, {tips: 1});
+         
+            layer.tips("<span style='color:red'>"+'邮箱格式不正确'+"</span>", this,{tips:[1,'#fff']});
+                       // $("#useremailError").show();
+                   } else {
+                    $("#useremailRight").show();
+
+                }
+            });
+   
+   });
+
+
+
+   
+  
+</script>
 {/block}
