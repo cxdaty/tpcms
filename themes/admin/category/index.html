@@ -28,6 +28,7 @@
                             <a href="{:url('admin/category/add',['pid'=>$vo['id']])}" class="layui-btn layui-btn-mini">添加子栏目</a>
                             <a href="{:url('admin/category/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
                             <a href="{:url('admin/category/delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                              <a class="btn green" onclick="openVerifyLayer('relationship','关系图','./edit.html?id={$vo.id}')"><i class="fa fa-codepen"></i>关系图</a>
                         </td>
                     </tr>
                     {/foreach}
@@ -37,4 +38,22 @@
         </div>
     </div>
 </div>
+
+<script src="__JS__/jquery.min.js"></script>
+<script type="text/javascript">
+ function openVerifyLayer(id,title,url){
+    layer.open({
+        type: 2,
+        id: id,
+        title: title,
+        shadeClose: true,
+        maxmin: true,
+        resize: false,
+        area: ['1600px', '80%'],
+        content: url
+    });
+
+}
+
+</script>
 {/block}

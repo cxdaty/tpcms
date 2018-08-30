@@ -23,6 +23,11 @@ http://moplat.mowork.cn/pm/
 user:  root
 pass:  password
 
+Rap接口定义，以后用这个地址：
+http://192.168.2.186:8000
+name:cxdaty111
+password:cxd123456
+
 共享盘
 网络-->WEBS-200
 name:administrator
@@ -42,15 +47,6 @@ window
 
 
 
-7/11
-微信小程序：
-采用MVVM 的开发模式(例如 React, Vue)，提倡把渲染和逻辑分离。简单来说就是不要再让 JS 直接操控 DOM，JS只需要管理状态即可，然后再通过一种模板语法来描述状态和界面结构的关系即可。
-JS 只需要管理状态即可:
-this.setData({ msg: "Hello World" })
-通过 {{ }} 的语法把一个变量绑定到界面上，我们称为数据绑定。仅仅通过数据绑定还不够完整的描述状态和界面的关系，还需要 if/else, for等控制能力，在小程序里边，这些控制能力都用 wx: 开头的属性来表达。
-
-Mowork3
-token=n1n0i173pv0glmiup3p9kbiljrm7q6xc
 
 接口文档
 
@@ -68,22 +64,23 @@ appid：wx341e64e926e079e0
 AppSecret：2ed4766bce8f8bb2589ac2c6dc0f4913
 
 
-7/19
-1.小程序 web view
 
 
-http://localhost/p1work
 
+8/27
+计划审核信息  很多没有数据
 
-jquery.validate.js
-Validform.js
+8/28
+1.计划列表接口 ：http://p1.mowork.cn/?m=api&c=plan&a=plist 状态
+2.计划任务表 ：completion 字段  完成情况
+3.计划任务没有开始时间，结束时间、
+4. 任务，字段问题         
+              plantask  issuetask
+节点序号       serial     NO
+实际开始时间    NO       real_sdate
+实际结束时间    NO       real_edate
+责任部门        NO
+责任人         NO
+参与人         NO
+名称           name          NO
 
-
-layui.use('layer', function(){
-  var $ = layui.jquery, layer = layui.layer; 
-  });
-
-正则：
-“/”代表一个正则表达式。
-“^”代表字符串的开始位置，“$”代表字符串的结束位置。
-“?”代表匹配前面的字符一个或零个，所以这里0?的意思是手机号码可以以0开头或不以0开头。
