@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+{include file="Public:head"} 
+</head>
+<body>
+	<div class="wrap">
+		{include file="Public:header"} 
+		<div class="section">
+			<div class="main">
+				<pre class="agreement">
+ 	<h1>{:config('systemname')}安装协议</h1><hr>
+版权所有 (c) 2016{:config('systemname')}<br>
+感谢您选择{:config('systemname')}，希望我们的努力能为您提供一个简单、强大的站点解决方案。
+<br>{:config('systemname')}遵循Apache Licence2开源协议，并且免费使用（但不包括其衍生产品、插件或者服务）。
+关的约束和限制。</pre>
+			</div>
+			<div class="bottom text-center">
+				<a href="{:url('index/step2')}" class="btn btn-primary">接 受</a>
+			</div>
+		</div>
+	</div>
+
+	{include file="Public:footer"} 
+</body>
+</html>

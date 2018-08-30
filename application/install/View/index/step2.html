@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+{include file="Public:head"} 
+</head>
+<body>
+	<div class="wrap">
+			{include file="Public:header"} 
+		<section class="section">
+			<div class="step">
+				<ul class="unstyled">
+					<li class="current"><em>1</em>检测环境</li>
+					<li><em>2</em>创建数据</li>
+					<li><em>3</em>完成安装</li>
+				</ul>
+			</div>
+			<div class="server">
+				 	<h3>系统环境检测</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>检测项目</th>
+							<th>最低需求</th>
+							<th>当前配置</th>
+						</tr>
+					</thead>
+					<tbody>
+						{volist name="env" id="env"}
+						<tr>
+							<td>{$env['0']}</td>
+							<td>{$env['1']}</td>
+							<td>{$env['2']}</td>
+						</tr>
+						{/volist}
+					</tbody>
+				</table>
+				<h3>文件权限检测</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>目录/文件</th>
+							<th>运行要求</th>
+							<th>当前状态</th>
+						</tr>
+					</thead>
+					<tbody>
+						{volist name="dirfile" id="dirfile"}
+						<tr>
+							<td>{$dirfile['3']}</td>
+							<td>可写</td>
+							<td>{$dirfile['1']|get_write_color}</td>
+						</tr>
+						{/volist}
+					</tbody>
+				</table>
+				<h3>运行函数检测</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>函数名称</th>
+							<th>运行要求</th>
+							<th>检测结果</th>
+						</tr>
+					</thead>
+					<tbody>
+						{volist name="fun" id="fun"}
+						<tr>
+							<td>{$fun['0']}</td>
+							<td>支持</td>
+							<td>{$fun['1']|get_fun_color}</td>
+						</tr>
+						{/volist}
+					</tbody>
+				</table>
+		
+			</div>
+			<div class="bottom text-center">
+				<a href="/" class="btn btn-primary">重新检测</a>
+				<a href="{:url('index/step3')}" class="btn btn-primary">下一步</a>
+			</div>
+		</section>
+	</div>
+	{include file="Public:footer"} 
+</body>
+</html>

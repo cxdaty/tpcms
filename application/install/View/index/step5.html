@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+{include file="Public:head"} 
+</head>
+<body>
+	<div class="wrap">
+	{include file="Public:header"} 
+		<section class="section">
+			<div style="padding: 40px 20px;">
+				<div class="text-center">
+					<a style="font-size: 18px;">恭喜您，安装完成！</a>
+					<br>
+					<br>
+					<div class="alert alert-danger" style="width: 350px;display: inline-block;">
+						为了您站点的安全，安装完成后即可将网站application目录下的“Install”文件夹删除!
+						
+					</div>
+					<br>
+					<a class="btn btn-success" href="{php}$_SERVER['SERVER_NAME']{/php}/">进入前台</a> 
+					<a class="btn btn-success" href="{php}$_SERVER['SERVER_NAME']{/php}/index.php/admin">进入后台</a> 
+				</div>
+			</div>
+		</section>
+	</div>
+
+	{include file="Public:footer"} 
+	
+</body>
+</html>
