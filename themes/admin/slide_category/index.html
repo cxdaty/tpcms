@@ -21,7 +21,7 @@
                     {foreach name="slide_category_list" item="vo"}
                     <tr>
                         <td>{$vo.id}</td>
-                        <td>{$vo.name}</td>
+                        <td>{$vo.name}<a href="{:url('admin/slide_category/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">添加助理</a></td>
                         <td>
                             <a href="{:url('admin/slide_category/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
                             <a href="{:url('admin/slide_category/delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>

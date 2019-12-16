@@ -7,7 +7,7 @@ use think\Db;
 class Index extends HomeBase
 {
     public function index()
-    {
+    {  
         return $this->fetch();
     }
 }

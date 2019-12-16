@@ -108,7 +108,7 @@ function check_dirfile()
 function check_fun()
 {
     $items = array(
-        array('iconv',     '支持', 'success'),
+        array('iconv','支持', 'success'),
         array('file_get_contents', '支持', 'success'),
         array('mb_strlen',         '支持', 'success'),
     );
@@ -262,7 +262,7 @@ function to_step5()
 {
     $url = url('index/step5');
     echo "<script type=\"text/javascript\">window.location.href='".$url."';</script>";
-    ob_flush();
-    flush();
+    ob_flush();//把数据从PHP的缓冲（buffer）中释放出来
+    flush();//把不在缓冲（buffer）中的或者说是被释放出来的数据发送到浏览器
     
 }
